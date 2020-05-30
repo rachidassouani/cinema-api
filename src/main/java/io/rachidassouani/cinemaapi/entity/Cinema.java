@@ -1,12 +1,25 @@
 package io.rachidassouani.cinemaapi.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
+@Entity
 public class Cinema implements Serializable {
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 50)
     private String name;
+
     private String address;
     private int countRooms;
+
+    @OneToMany(mappedBy = "cinema")
+    private Collection<Room> rooms;
+
+    @ManyToOne
+    private City city;
 
     // constructors
     public Cinema() {}
@@ -16,7 +29,6 @@ public class Cinema implements Serializable {
         this.address = address;
         this.countRooms = countRooms;
     }
-
 
     // getters & setters
     public Long getId() {
@@ -49,5 +61,21 @@ public class Cinema implements Serializable {
 
     public void setCountRooms(int countRooms) {
         this.countRooms = countRooms;
+    }
+
+    public Collection<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Collection<Room> rooms) {
+        this.rooms = rooms;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 }
