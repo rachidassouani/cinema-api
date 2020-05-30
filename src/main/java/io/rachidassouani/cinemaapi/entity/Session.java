@@ -2,18 +2,19 @@ package io.rachidassouani.cinemaapi.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class Session implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double hourStart;
+    private Date hourStart;
 
     // constructors
     public Session() {
     }
 
-    public Session(double hourStart) {
+    public Session(Date hourStart) {
         this.hourStart = hourStart;
     }
 
@@ -26,11 +27,11 @@ public class Session implements Serializable {
         this.id = id;
     }
 
-    public double getHourStart() {
+    public Date getHourStart() {
         return hourStart;
     }
 
-    public void setHourStart(double hourStart) {
+    public void setHourStart(Date hourStart) {
         this.hourStart = hourStart;
     }
 }

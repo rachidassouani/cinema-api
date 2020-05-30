@@ -28,6 +28,14 @@ public class ProjectionMovie implements Serializable {
     public ProjectionMovie() {
     }
 
+    public ProjectionMovie(Date dateProjection, double price, Room room, Movie movie, Session session) {
+        this.dateProjection = dateProjection;
+        this.price = price;
+        this.room = room;
+        this.movie = movie;
+        this.session = session;
+    }
+
     // getters & setters
     public Long getId() {
         return id;

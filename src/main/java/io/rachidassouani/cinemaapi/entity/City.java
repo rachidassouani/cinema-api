@@ -16,6 +16,8 @@ public class City implements Serializable {
     private Collection<Cinema> cinemas;
 
     // constructors
+    public City() { }
+
     public City(String name) {
         this.name = name;
     }

@@ -30,6 +30,13 @@ public class Cinema implements Serializable {
         this.countRooms = countRooms;
     }
 
+    public Cinema(String name, String address, int countRooms, City city) {
+        this.name = name;
+        this.address = address;
+        this.countRooms = countRooms;
+        this.city = city;
+    }
+
     // getters & setters
     public Long getId() {
         return id;

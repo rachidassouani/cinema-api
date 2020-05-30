@@ -13,7 +13,7 @@ public class Ticket implements Serializable {
 
     private double price;
     private String paymentCode;
-    private double reserve;
+    private boolean reserve;
 
     @ManyToOne
     private Seat seat;
@@ -25,10 +25,13 @@ public class Ticket implements Serializable {
     public Ticket() {
     }
 
-    public Ticket(String nameClient, double price, String paymentCode) {
+    public Ticket(String nameClient, double price, String paymentCode, boolean reserve, Seat seat, ProjectionMovie projectionMovie) {
         this.nameClient = nameClient;
         this.price = price;
         this.paymentCode = paymentCode;
+        this.reserve = reserve;
+        this.seat = seat;
+        this.projectionMovie = projectionMovie;
     }
 
     // getters & setters
@@ -64,11 +67,11 @@ public class Ticket implements Serializable {
         this.paymentCode = paymentCode;
     }
 
-    public double getReserve() {
+    public boolean getReserve() {
         return reserve;
     }
 
-    public void setReserve(double reserve) {
+    public void setReserve(boolean reserve) {
         this.reserve = reserve;
     }
 

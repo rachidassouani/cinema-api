@@ -17,7 +17,7 @@ public class Movie implements Serializable {
     private String director;
 
     private String description;
-    private String duration;
+    private double duration;
     private String photo;
     private Date releaseDate;
 
@@ -31,11 +31,20 @@ public class Movie implements Serializable {
     public Movie() {
     }
 
-    public Movie(String title, String duration, String director, String description) {
+    public Movie(String title, double duration, String director, String description) {
         this.title = title;
         this.duration = duration;
         this.director = director;
         this.description = description;
+    }
+
+    public Movie(String title, String director, String description, double duration, Date releaseDate, Category category) {
+        this.title = title;
+        this.director = director;
+        this.description = description;
+        this.duration = duration;
+        this.releaseDate = releaseDate;
+        this.category = category;
     }
 
     // getters & setters
@@ -55,11 +64,11 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
-    public String getDuration() {
+    public double getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(double duration) {
         this.duration = duration;
     }
 
