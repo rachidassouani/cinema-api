@@ -1,5 +1,7 @@
 package io.rachidassouani.cinemaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -19,16 +21,16 @@ public class Ticket implements Serializable {
     private Seat seat;
 
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private ProjectionMovie projectionMovie;
 
     // constructors
     public Ticket() {
     }
 
-    public Ticket(String nameClient, double price, String paymentCode, boolean reserve, Seat seat, ProjectionMovie projectionMovie) {
+    public Ticket(String nameClient, double price, boolean reserve, Seat seat, ProjectionMovie projectionMovie) {
         this.nameClient = nameClient;
         this.price = price;
-        this.paymentCode = paymentCode;
         this.reserve = reserve;
         this.seat = seat;
         this.projectionMovie = projectionMovie;

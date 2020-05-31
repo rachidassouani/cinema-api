@@ -56,7 +56,7 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
         cityRepository.findAll()
                 .forEach(city -> {
                     Stream.of("MEGARAMA", "DAOULIZ","CHAHRAZAD", "FOUNOUN").forEach(cinemaName->{
-                        cinemaRepository.save(new Cinema(cinemaName, "",40, city));
+                        cinemaRepository.save(new Cinema(cinemaName, "",10, city));
                     });
                 });
     }
@@ -65,7 +65,7 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
     public void initRooms() {
         cinemaRepository.findAll().forEach(cinema -> {
            for (int i = 0; i < cinema.getCountRooms(); i++) {
-               Room room = new Room("Room " + (i + 1) , 30, cinema);
+               Room room = new Room("Room " + (i + 1) , 15, cinema);
                roomRepository.save(room);
            }
         });
@@ -144,7 +144,7 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
         projectionRepository.findAll().forEach(projectionMovie -> {
             projectionMovie.getRoom().getSeats().forEach(seat -> {
                 Ticket ticket =
-                        new Ticket("", projectionMovie.getPrice(), "ff", true, seat, projectionMovie);
+                        new Ticket("", projectionMovie.getPrice(), false, seat, projectionMovie);
                 ticketRepository.save(ticket);
             });
         });

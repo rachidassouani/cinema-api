@@ -1,5 +1,7 @@
 package io.rachidassouani.cinemaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
@@ -11,6 +13,7 @@ public class Seat implements Serializable {
     private int number;
 
     @OneToMany(mappedBy = "seat")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Collection<Ticket> tickets;
 
     @ManyToOne
