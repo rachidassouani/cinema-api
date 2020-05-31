@@ -38,13 +38,14 @@ public class Movie implements Serializable {
         this.description = description;
     }
 
-    public Movie(String title, String director, String description, double duration, Date releaseDate, Category category) {
+    public Movie(String title, String director, String description, double duration, Date releaseDate, Category category, String photo) {
         this.title = title;
         this.director = director;
         this.description = description;
         this.duration = duration;
         this.releaseDate = releaseDate;
         this.category = category;
+        this.photo = photo;
     }
 
     // getters & setters

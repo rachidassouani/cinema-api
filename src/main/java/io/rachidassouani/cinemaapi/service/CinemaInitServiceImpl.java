@@ -105,7 +105,16 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
     public void initMovies() {
         List<Category> categories = categoryRepository.findAll();
         Stream.of("The Wrong Missy", "Joker", "Parasite", "Avengers", "1917").forEach(movieName -> {
-            Movie movie = new Movie(movieName, "director1", "desc1", 134, new Date(), categories.get(new Random().nextInt(categories.size())));
+            /*
+                photo name is movie name without any spaces
+                example :
+                movie name          : The Wrong Missy
+                photo name will be  : TheWrongMissy
+
+             */
+            String photoName = movieName.replaceAll(" ", "");
+            Movie movie = new Movie(movieName, "director1", "desc1", 134, new Date(), categories.get(new Random().nextInt(categories.size())), photoName);
+            // save movie
             movieRepository.save(movie);
         });
 
