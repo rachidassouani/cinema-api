@@ -1,9 +1,7 @@
 package io.rachidassouani.cinemaapi.controller;
 
-import io.rachidassouani.cinemaapi.dao.MovieRepository;
-import io.rachidassouani.cinemaapi.dao.TicketRepository;
-import io.rachidassouani.cinemaapi.entity.Movie;
-import io.rachidassouani.cinemaapi.entity.Ticket;
+import io.rachidassouani.cinemaapi.dao.*;
+import io.rachidassouani.cinemaapi.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +22,15 @@ public class CinemaRestController {
     private MovieRepository movieRepository;
     @Autowired
     private TicketRepository ticketRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
+
+    @Autowired
+    private CinemaRepository cinemaRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
 
     @GetMapping(value = "moviePhoto/{idMovie}", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getPhotoOfMovie(@PathVariable("idMovie") Long id) throws IOException {
@@ -69,6 +76,12 @@ public class CinemaRestController {
         return tickets;
     }
 
+    @DeleteMapping("deleteCinemas/{id}/{idCity}")
+    @Transactional
+    public void deleteCinema(@PathVariable("id") Long id,
+                             @PathVariable("idCity") Long idCity) {
+        cinemaRepository.deleteCinemaByIdAndCityId(id, idCity);
+    }
 }
 class TicketForm {
     private List<Long> tickets = new ArrayList<>();

@@ -44,10 +44,23 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
     @Autowired
     private TicketRepository ticketRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
+
+    @Override
+    public void initUsers() {
+        Stream.of("Rachid", "Anas", "Med Amine", "Ibrahim", "Hanane", "Alae")
+                .forEach(username -> {
+                    userRepository.save(new User(username+"@gmail.com", username, "1234"));
+                });
+    }
 
     @Override
     public void initCities() {
-        Stream.of("Sale", "Casablanca", "Rabat", "Fes")
+        Stream.of("Sale", "Casablanca", "Rabat", "Fes", "Meknès", "Marrakech", "Agadir", "Essaouira", "Chefchaouen")
                 .forEach(city -> cityRepository.save(new City(city)));
     }
 
@@ -55,7 +68,7 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
     public void initCinemas() {
         cityRepository.findAll()
                 .forEach(city -> {
-                    Stream.of("MEGARAMA", "DAOULIZ","CHAHRAZAD", "FOUNOUN").forEach(cinemaName->{
+                    Stream.of("MEGARAMA", "Cinéma RIF","CHAHRAZAD", "Cinela Lynx", "Cinema Rialto", "Royal", "Paradise", "IMAX", "FOUNOUN").forEach(cinemaName->{
                         cinemaRepository.save(new Cinema(cinemaName, "",10, city));
                     });
                 });
@@ -104,7 +117,8 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
     @Override
     public void initMovies() {
         List<Category> categories = categoryRepository.findAll();
-        Stream.of("The Wrong Missy", "Joker", "Parasite", "Avengers", "1917").forEach(movieName -> {
+        Stream.of("Invisible Man", "The Wrong Missy", "Joker", "Parasite",
+                "Avengers", "1917", "Black Widow", "The Way Back").forEach(movieName -> {
             /*
                 photo name is movie name without any spaces
                 example :
@@ -118,6 +132,17 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
             movieRepository.save(movie);
         });
 
+    }
+
+    @Override
+    public void initReviews() {
+        movieRepository.findAll().forEach(movie -> {
+            userRepository.findAll().forEach(user -> {
+                reviewRepository
+                        .save(new Review(movie.getTitle()+" is a Great Movie",
+                                movie, user));
+            });
+        });
     }
 
     @Override
@@ -150,4 +175,5 @@ public class CinemaInitServiceImpl implements ICinemaInitService {
             });
         });
     }
+
 }

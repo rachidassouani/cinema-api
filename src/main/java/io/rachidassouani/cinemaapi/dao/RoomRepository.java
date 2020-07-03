@@ -6,4 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @CrossOrigin("*")
 public interface RoomRepository extends JpaRepository<Room, Long> {
+
+    
+        int countByCinemaId(Long cinemaId);
 }

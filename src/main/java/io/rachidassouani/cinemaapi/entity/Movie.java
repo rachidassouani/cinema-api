@@ -27,6 +27,9 @@ public class Movie implements Serializable {
     @OneToMany(mappedBy = "movie")
     private Collection<ProjectionMovie> projectionMovies;
 
+    @OneToMany(mappedBy = "movie")
+    private Collection<Review> reviews;
+
     // constructors
     public Movie() {
     }
@@ -46,6 +49,16 @@ public class Movie implements Serializable {
         this.releaseDate = releaseDate;
         this.category = category;
         this.photo = photo;
+    }
+    public Movie(String title, String director, String description, double duration, Date releaseDate, Category category, String photo, Collection<Review> reviews) {
+        this.title = title;
+        this.director = director;
+        this.description = description;
+        this.duration = duration;
+        this.releaseDate = releaseDate;
+        this.category = category;
+        this.photo = photo;
+        this.reviews = reviews;
     }
 
     // getters & setters
@@ -119,5 +132,13 @@ public class Movie implements Serializable {
 
     public void setProjectionMovies(Collection<ProjectionMovie> projectionMovies) {
         this.projectionMovies = projectionMovies;
+    }
+
+    public Collection<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Collection<Review> reviews) {
+        this.reviews = reviews;
     }
 }
